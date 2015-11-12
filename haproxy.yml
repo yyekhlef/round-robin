@@ -1,0 +1,29 @@
+---
+- hosts: haproxy
+
+  # Vous pouvez changer ces variables pour tester :)
+  vars:
+    haproxy_algorithm: roundrobin
+    haproxy_backend_servers:
+      - { name: google, ip: google.fr, port: 80 }
+      - { name: yahoo, ip: yahoo.fr, port: 80 }
+    haproxy_stats_users:
+      - {username: stats, password: stats }
+
+  tasks:
+    - name: update apt cache
+      # TODO mettre à jour le cache apt
+
+    - name: install haproxy
+      # TODO installer le paquet haproxy (astuce: s'assurer qu'il est présent)
+
+    - name: enable init script
+      replace: dest='/etc/default/haproxy'
+              regexp='ENABLED=0'
+              replace='ENABLED=1'
+
+    - name: update HAProxy config
+      # TODO Générer le fichier /etc/haproxy/haproxy.cf à partir de templates/haproxy.cfg ci-joint
+
+    - name: start haproxy
+      # TODO Démarrer le service haproxy (astuce: s'assurer de son état)
